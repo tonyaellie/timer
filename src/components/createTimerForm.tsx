@@ -206,7 +206,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   </Button>
                 </div>
                 <FormDescription>
-                  This is the name of the timer you want to create.
+                  This is the time the timer will run for.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
