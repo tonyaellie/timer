@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type PusherType from "pusher-js";
 
 import { Progress } from "./ui/progress";
@@ -20,7 +20,13 @@ type Timer = {
   groupId: string;
 };
 
-const Timer = ({ data }: { data: Timer }) => {
+const Timer = ({
+  data,
+  alarmRef,
+}: {
+  data: Timer;
+  alarmRef: React.RefObject<HTMLAudioElement>;
+}) => {
   const pauseTimer = api.group.pauseTimer.useMutation();
   const resumeTimer = api.group.resumeTimer.useMutation();
   const resetTimer = api.group.resetTimer.useMutation();
@@ -32,6 +38,8 @@ const Timer = ({ data }: { data: Timer }) => {
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [loadingAddTime, setLoadingAddTime] = useState(false);
 
+  const [startedAlarm, setStartedAlarm] = useState(false);
+
   const currentTimeOrPausedAt =
     data.pausedAt?.getTime() ?? new Date().getTime();
   const startTimeWithPaused = data.startsAt.getTime() + data.totalPaused;
@@ -40,7 +48,14 @@ const Timer = ({ data }: { data: Timer }) => {
 
   const completed = timeCompleted >= data.length;
 
+  if (completed && !startedAlarm && alarmRef.current) {
+    alarmRef.current.currentTime = 0;
+    void alarmRef.current.play();
+    setStartedAlarm(true);
+  }
+
   const timeLeft = data.length - timeCompleted;
+
   const hours = Math.floor(timeLeft / 3600);
   const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = Math.floor(timeLeft % 60);
@@ -131,11 +146,13 @@ const Timer = ({ data }: { data: Timer }) => {
       <Progress
         value={completed ? 100 : (timeCompleted / data.length) * 100}
         text={
-          hours !== 0
-            ? `${hours}h ${minutes.toString().padStart(2, "0")}m ${seconds.toString().padStart(2, "0")}s`
-            : minutes !== 0
-              ? `${minutes}m ${seconds.toString().padStart(2, "0")}s`
-              : `${seconds}s`
+          completed
+            ? "Completed"
+            : hours !== 0
+              ? `${hours}h ${minutes.toString().padStart(2, "0")}m ${seconds.toString().padStart(2, "0")}s`
+              : minutes !== 0
+                ? `${minutes}m ${seconds.toString().padStart(2, "0")}s`
+                : `${seconds}s`
         }
       />
     </div>
@@ -150,6 +167,7 @@ export const Timers = ({
   groupId: string;
 }) => {
   const [timers, setTimers] = useState(timersInput);
+  const alarmRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     if (!window) return;
@@ -257,7 +275,7 @@ export const Timers = ({
       channel.unbind_all();
       channel.unsubscribe();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // force a re-render every 200ms, this is to update the timers
@@ -272,9 +290,14 @@ export const Timers = ({
 
   return (
     <>
-      {timers.map((timer) => (
-        <Timer data={timer} key={timer.id} />
-      ))}
+      <audio ref={alarmRef} controls>
+        <source src="/alarm.mp3" type="audio/mpeg" />
+      </audio>
+      {timers
+        .sort((a, b) => a.startsAt.getTime() - b.startsAt.getTime())
+        .map((timer) => (
+          <Timer data={timer} key={timer.id} alarmRef={alarmRef} />
+        ))}
     </>
   );
 };

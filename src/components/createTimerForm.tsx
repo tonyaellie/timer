@@ -60,6 +60,8 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
           parseInt(values.time.slice(2, 4)) * 60 +
           parseInt(values.time.slice(4, 6)),
       });
+      // wait 200ms for the timer to be created
+      await new Promise((resolve) => setTimeout(resolve, 200));
       toast("Timer created successfully, redirecting...");
       // redirect to the group page
       router.push(`/group/${groupId}`);
