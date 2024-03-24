@@ -22,18 +22,21 @@ import { Badge } from "./ui/badge";
 import { Command as CommandPrimitive } from "cmdk";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 type Member = Record<"value" | "label", string>;
 
 const FancyMultiSelect = ({
   members,
   updateSelected,
+  selectedMembers,
 }: {
   members: Member[];
   updateSelected: (selected: Member[]) => void;
+  selectedMembers: Member[];
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [selected, setSelected] = useState<Member[]>([]);
+  const [selected, setSelected] = useState<Member[]>(selectedMembers);
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -198,6 +201,7 @@ export const CreateGroupForm = ({
     try {
       setSubmitting(true);
       const { groupId } = await createGroup.mutateAsync(values);
+      toast("Group created successfully, redirecting...");
       // redirect to the group page
       router.push(`/group/${groupId}`);
     } catch (error) {
@@ -251,6 +255,12 @@ export const CreateGroupForm = ({
                         selected.map((s) => s.value),
                       );
                     }}
+                    selectedMembers={form
+                      .getValues("members")
+                      .map((member) => ({
+                        value: member,
+                        label: members.find((m) => m.id === member)!.username,
+                      }))}
                   />
                 </FormControl>
                 <FormDescription>

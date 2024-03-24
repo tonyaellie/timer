@@ -18,10 +18,11 @@ import { Input } from "~/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Delete } from "lucide-react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
-  name: z.string(),
-  time: z.string(), // 00h 00m 00s, stored as 6 digits
+  name: z.string().min(3),
+  time: z.string().length(6), // 00h 00m 00s, stored as 6 digits
 });
 
 export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
@@ -46,6 +47,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
       setSubmitting(true);
       // TODO: create the timer
       // const { groupId } = await createGroup.mutateAsync(values);
+      toast("Timer created successfully, redirecting...");
       // redirect to the group page
       router.push(`/group/${groupId}`);
     } catch (error) {
@@ -57,6 +59,20 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
       console.error(error);
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleNumberClick = (num: string) => {
+    console.log(num);
+    const { time } = form.getValues();
+    if (num === "del") {
+      form.setValue("time", "0" + time.slice(0, -1));
+    } else {
+      if (time.startsWith("00") && num == "00") {
+        form.setValue("time", time.slice(2) + num);
+      } else if (time.startsWith("0")) {
+        form.setValue("time", time.slice(1) + num[0]);
+      }
     }
   };
 
@@ -89,7 +105,22 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                 <FormLabel>Timer Name</FormLabel>
                 <FormControl>
                   <Input
-                    value={field.value}
+                    onKeyDown={(e) => {
+                      if (e.key === "Backspace" || e.key === "Delete") {
+                        e.preventDefault();
+                        handleNumberClick("del");
+                      }
+
+                      // check if the key is a number
+                      if (e.key.match(/^[0-9]$/) && e.key !== "Enter") {
+                        e.preventDefault();
+                        handleNumberClick(e.key);
+                      }
+                    }}
+                    value={`${field.value.slice(0, 2)}h ${field.value.slice(
+                      2,
+                      4,
+                    )}m ${field.value.slice(4, 6)}s`}
                     onChange={(e) => {
                       e.preventDefault();
                     }}
@@ -99,7 +130,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("1");
                     }}
                     variant="outline"
                   >
@@ -108,7 +139,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("2");
                     }}
                     variant="outline"
                   >
@@ -117,7 +148,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("3");
                     }}
                     variant="outline"
                   >
@@ -126,7 +157,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("4");
                     }}
                     variant="outline"
                   >
@@ -135,7 +166,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("5");
                     }}
                     variant="outline"
                   >
@@ -144,7 +175,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("6");
                     }}
                     variant="outline"
                   >
@@ -153,7 +184,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("7");
                     }}
                     variant="outline"
                   >
@@ -162,7 +193,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("8");
                     }}
                     variant="outline"
                   >
@@ -171,7 +202,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("9");
                     }}
                     variant="outline"
                   >
@@ -180,7 +211,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("00");
                     }}
                     variant="outline"
                   >
@@ -189,7 +220,7 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("0");
                     }}
                     variant="outline"
                   >
@@ -198,9 +229,9 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("clicked 1");
+                      handleNumberClick("del");
                     }}
-                    variant="outline"
+                    variant="destructive"
                   >
                     <Delete />
                   </Button>

@@ -69,10 +69,18 @@ export const timersRelations = relations(timers, ({ one }) => ({
   }),
 }));
 
-export const members = createTable("members", {
-  id: varchar("id", { length: 36 }).primaryKey(),
-  groupId: char("group_id", { length: 12 }).notNull(),
-});
+export const members = createTable(
+  "members",
+  {
+    id: varchar("id", { length: 36 }).notNull(),
+    groupId: char("group_id", { length: 12 }).notNull(),
+  },
+  (members) => ({
+    members_pKey: primaryKey({
+      columns: [members.id, members.groupId],
+    }),
+  }),
+);
 
 export const memberRelations = relations(members, ({ one }) => ({
   group: one(groups, {

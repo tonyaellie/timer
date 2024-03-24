@@ -6,6 +6,7 @@ import { ClerkProvider, UserButton } from "@clerk/nextjs";
 import { TRPCReactProvider } from "~/trpc/react";
 import Link from "next/link";
 import { dark } from "@clerk/themes";
+import { Toaster } from "~/components/ui/sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`font-sans ${inter.variable}`}>
           <TRPCReactProvider>
+            <Toaster />
             <div className="m-2 flex flex-row">
               <Link href="/" className="my-auto text-lg font-bold text-primary">
                 Shared Timer
