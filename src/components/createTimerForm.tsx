@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Delete } from "lucide-react";
 import { toast } from "sonner";
+import { api } from "~/trpc/react";
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -35,6 +36,8 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
   });
   const router = useRouter();
 
+  const createTimer = api.group.createTimer.useMutation();
+
   const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -46,7 +49,17 @@ export const CreateTimerForm = ({ groupId }: { groupId: string }) => {
     try {
       setSubmitting(true);
       // TODO: create the timer
-      // const { groupId } = await createGroup.mutateAsync(values);
+      await createTimer.mutateAsync({
+        groupId,
+        name: values.name,
+        duration:
+          // convert the time to seconds
+          // 00h 00m 00s
+          // take the first two characters * 3600, the next two * 60, and the last two
+          parseInt(values.time.slice(0, 2)) * 3600 +
+          parseInt(values.time.slice(2, 4)) * 60 +
+          parseInt(values.time.slice(4, 6)),
+      });
       toast("Timer created successfully, redirecting...");
       // redirect to the group page
       router.push(`/group/${groupId}`);

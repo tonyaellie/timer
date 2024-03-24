@@ -53,7 +53,7 @@ export const timers = createTable(
     }).notNull(), // in seconds
     pausedAt: timestamp("paused_at"), // time the timer was paused (if it was paused)
     totalPaused: bigint("total_paused", { mode: "number" }).notNull(), // total time the timer was paused (not including the current pause)
-    groupId: bigint("group_id", { mode: "number" }).notNull(),
+    groupId: char("group_id", { length: 12 }).notNull(),
   },
   (timers) => ({
     timers_pkey: primaryKey({

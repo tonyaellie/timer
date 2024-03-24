@@ -24,10 +24,12 @@ const Progress = React.forwardRef<
     {...props}
   >
     <ProgressPrimitive.Indicator
+      suppressHydrationWarning
       className="h-full w-full flex-1 bg-primary transition-all"
       style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}
     />
     <div
+      suppressHydrationWarning
       className="absolute inset-0 flex items-center justify-center"
       style={{ zIndex: 1 }}
     >

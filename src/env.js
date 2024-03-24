@@ -18,6 +18,8 @@ export const env = createEnv({
       .enum(["development", "test", "production"])
       .default("development"),
     CLERK_SECRET_KEY: z.string(),
+    PUSHER_APP_ID: z.string(),
+    PUSHER_APP_SECRET: z.string(),
   },
 
   /**
@@ -28,6 +30,8 @@ export const env = createEnv({
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
+    NEXT_PUBLIC_PUSHER_APP_KEY: z.string(),
+    NEXT_PUBLIC_PUSHER_APP_CLUSTER: z.string(),
   },
 
   /**
@@ -38,8 +42,13 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+    PUSHER_APP_ID: process.env.PUSHER_APP_ID,
+    PUSHER_APP_KEY: process.env.PUSHER_APP_KEY,
+    PUSHER_APP_SECRET: process.env.PUSHER_APP_SECRET,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_PUSHER_APP_KEY: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
+    NEXT_PUBLIC_PUSHER_APP_CLUSTER: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

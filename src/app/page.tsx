@@ -1,7 +1,7 @@
 import { db } from "~/server/db";
 import { auth, clerkClient } from "@clerk/nextjs";
 import Link from "next/link";
-import { Button, buttonVariants } from "~/components/ui/button";
+import { buttonVariants } from "~/components/ui/button";
 import { Plus } from "lucide-react";
 
 const Home = async () => {

@@ -1,6 +1,7 @@
 import { auth, clerkClient } from "@clerk/nextjs";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Timers } from "~/components/timers";
 import { buttonVariants } from "~/components/ui/button";
 
 import { db } from "~/server/db";
@@ -44,14 +45,7 @@ const Group = async ({
         </p>
       </div>
       <div className="flex flex-col justify-center space-y-2 p-2">
-        {group.timers.map((timer) => (
-          <div
-            key={timer.id}
-            className="flex flex-row rounded-md border border-input bg-background p-2"
-          >
-            gay
-          </div>
-        ))}
+        <Timers timers={group.timers} groupId={group.id} />
         <Link
           href={`/group/${group.id}/create`}
           className={buttonVariants({ variant: "outline" })}
