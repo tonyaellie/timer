@@ -175,8 +175,15 @@ export const Timers = ({
     const Pusher = require("pusher-js/with-encryption") as typeof PusherType;
 
     const pusher = new Pusher(env.NEXT_PUBLIC_PUSHER_APP_KEY, {
-      cluster: env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
+      wsHost: env.NEXT_PUBLIC_PUSHER_HOST,
+      forceTLS: false,
+      enabledTransports: ["ws", "wss"],
+      disableStats: true,
+
+      cluster: "",
     });
+
+    console.log(`Subscribing to group-${groupId}`);
 
     const channel = pusher.subscribe(`group-${groupId}`);
 
@@ -290,11 +297,11 @@ export const Timers = ({
 
   return (
     <>
-      <audio ref={alarmRef} controls>
+      <audio ref={alarmRef} hidden>
         <source src="/alarm.mp3" type="audio/mpeg" />
       </audio>
       {timers
-        .sort((a, b) => a.startsAt.getTime() - b.startsAt.getTime())
+        .sort((a, b) => a.id.localeCompare(b.id))
         .map((timer) => (
           <Timer data={timer} key={timer.id} alarmRef={alarmRef} />
         ))}

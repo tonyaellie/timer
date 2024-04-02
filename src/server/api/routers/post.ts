@@ -13,11 +13,11 @@ const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const nanoid = customAlphabet(alphabet, 12);
 
 const pusher = new Pusher({
+  host: env.NEXT_PUBLIC_PUSHER_HOST,
+  useTLS: true,
   appId: env.PUSHER_APP_ID,
   key: env.NEXT_PUBLIC_PUSHER_APP_KEY,
   secret: env.PUSHER_APP_SECRET,
-  cluster: env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
-  useTLS: true,
 });
 
 export const groupRouter = createTRPCRouter({

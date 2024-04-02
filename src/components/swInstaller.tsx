@@ -11,13 +11,13 @@ export const SWInstaller = () => {
         .then((registration) => console.log("scope is: ", registration.scope));
     }
     // request permission for notifications
-    if ("Notification" in window) {
-      void Notification.requestPermission().then((result) => {
-        if (result === "granted") {
-          console.log("Notification permission granted");
-        }
-      });
-    }
+    // if ("Notification" in window) {
+    //   void Notification.requestPermission().then((result) => {
+    //     if (result === "granted") {
+    //       console.log("Notification permission granted");
+    //     }
+    //   });
+    // }
   }, []);
   return null;
 };
