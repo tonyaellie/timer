@@ -23,7 +23,7 @@ const Group = async ({
     },
   });
 
-  if (!group || !group.members.some((member) => member.id === user.userId)) {
+  if (!group?.members.some((member) => member.id === user.userId)) {
     return notFound();
   }
 
