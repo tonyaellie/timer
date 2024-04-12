@@ -40,16 +40,16 @@ dependencies:
     version: 5.28.14(react@18.2.0)
   '@trpc/client':
     specifier: next
-    version: 11.0.0-rc.330(@trpc/server@11.0.0-rc.330)
+    version: 11.0.0-rc.334(@trpc/server@11.0.0-rc.334)
   '@trpc/next':
     specifier: next
-    version: 11.0.0-rc.330(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.330)(@trpc/react-query@11.0.0-rc.330)(@trpc/server@11.0.0-rc.330)(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
+    version: 11.0.0-rc.334(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.334)(@trpc/react-query@11.0.0-rc.334)(@trpc/server@11.0.0-rc.334)(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
   '@trpc/react-query':
     specifier: next
-    version: 11.0.0-rc.330(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.330)(@trpc/server@11.0.0-rc.330)(react-dom@18.2.0)(react@18.2.0)
+    version: 11.0.0-rc.334(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.334)(@trpc/server@11.0.0-rc.334)(react-dom@18.2.0)(react@18.2.0)
   '@trpc/server':
     specifier: next
-    version: 11.0.0-rc.330
+    version: 11.0.0-rc.334
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -61,7 +61,7 @@ dependencies:
     version: 0.2.1(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)
   drizzle-orm:
     specifier: ^0.29.5
-    version: 0.29.5(@planetscale/database@1.16.0)(@types/react@18.2.74)(mysql2@3.9.3)(react@18.2.0)
+    version: 0.29.5(@planetscale/database@1.16.0)(@types/react@18.2.74)(mysql2@3.9.4)(react@18.2.0)
   lucide-react:
     specifier: ^0.359.0
     version: 0.359.0(react@18.2.0)
@@ -140,8 +140,8 @@ devDependencies:
     specifier: ^0.2.3
     version: 0.2.3(eslint@8.57.0)
   mysql2:
-    specifier: ^3.9.3
-    version: 3.9.3
+    specifier: ^3.9.4
+    version: 3.9.4
   postcss:
     specifier: ^8.4.38
     version: 8.4.38
@@ -1655,21 +1655,21 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@trpc/client@11.0.0-rc.330(@trpc/server@11.0.0-rc.330):
-    resolution: {integrity: sha512-7Z0Ty5BZgWm8SgDMh2Me+WoBOqHoB938S2lK7d5bK8jMwiatGeUpAOaOJ1047rCqnLSEPXYfy8ylaTOrfaLr3Q==}
+  /@trpc/client@11.0.0-rc.334(@trpc/server@11.0.0-rc.334):
+    resolution: {integrity: sha512-nVKOxCfhKxBXvs1MwjfNNsWHQH/rHWzS4SxYPtYld7zqANTfNqn8cuClHMKlkeMKljObFiCfWhbdrBamKO/dDw==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.330+c89fb11f2
+      '@trpc/server': 11.0.0-rc.334+fdf26e552
     dependencies:
-      '@trpc/server': 11.0.0-rc.330
+      '@trpc/server': 11.0.0-rc.334
     dev: false
 
-  /@trpc/next@11.0.0-rc.330(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.330)(@trpc/react-query@11.0.0-rc.330)(@trpc/server@11.0.0-rc.330)(next@14.1.4)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-pXza0X0gGpBzt4zhq7bhMg8KFsNr5ajK3wi/0npkmt8DImZwBKf7A6Tkloxh1qB331Qu7onhEfZoR3gTGbp5Rg==}
+  /@trpc/next@11.0.0-rc.334(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.334)(@trpc/react-query@11.0.0-rc.334)(@trpc/server@11.0.0-rc.334)(next@14.1.4)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-9cOIlH+784FpLOs/lRDTfb5llJbI9xwNw2ridnWWTCagG88Lo4T4w825TddcSpkKZhMqrvFCMCTauSjMpOC2zQ==}
     peerDependencies:
       '@tanstack/react-query': ^5.25.0
-      '@trpc/client': 11.0.0-rc.330+c89fb11f2
-      '@trpc/react-query': 11.0.0-rc.330+c89fb11f2
-      '@trpc/server': 11.0.0-rc.330+c89fb11f2
+      '@trpc/client': 11.0.0-rc.334+fdf26e552
+      '@trpc/react-query': 11.0.0-rc.334+fdf26e552
+      '@trpc/server': 11.0.0-rc.334+fdf26e552
       next: '*'
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -1680,32 +1680,32 @@ packages:
         optional: true
     dependencies:
       '@tanstack/react-query': 5.28.14(react@18.2.0)
-      '@trpc/client': 11.0.0-rc.330(@trpc/server@11.0.0-rc.330)
-      '@trpc/react-query': 11.0.0-rc.330(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.330)(@trpc/server@11.0.0-rc.330)(react-dom@18.2.0)(react@18.2.0)
-      '@trpc/server': 11.0.0-rc.330
+      '@trpc/client': 11.0.0-rc.334(@trpc/server@11.0.0-rc.334)
+      '@trpc/react-query': 11.0.0-rc.334(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.334)(@trpc/server@11.0.0-rc.334)(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/server': 11.0.0-rc.334
       next: 14.1.4(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@trpc/react-query@11.0.0-rc.330(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.330)(@trpc/server@11.0.0-rc.330)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-qkAu+xxPE4dN8osBdsQNMzdEdZw6S5KnGR0WH7sCG0Rx0R0ynH0QBxlmWfhiKTXkKd1yGHIkBlN4EB2bQJ64lw==}
+  /@trpc/react-query@11.0.0-rc.334(@tanstack/react-query@5.28.14)(@trpc/client@11.0.0-rc.334)(@trpc/server@11.0.0-rc.334)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DvhU7qMfQkLyrhQoDlrtMAGIgJyin9I8WCsF0oGlAD95ygoJcviD8D+lQzSCUttul9rPcNqWDuGhm5laS7V43A==}
     peerDependencies:
       '@tanstack/react-query': ^5.25.0
-      '@trpc/client': 11.0.0-rc.330+c89fb11f2
-      '@trpc/server': 11.0.0-rc.330+c89fb11f2
+      '@trpc/client': 11.0.0-rc.334+fdf26e552
+      '@trpc/server': 11.0.0-rc.334+fdf26e552
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
     dependencies:
       '@tanstack/react-query': 5.28.14(react@18.2.0)
-      '@trpc/client': 11.0.0-rc.330(@trpc/server@11.0.0-rc.330)
-      '@trpc/server': 11.0.0-rc.330
+      '@trpc/client': 11.0.0-rc.334(@trpc/server@11.0.0-rc.334)
+      '@trpc/server': 11.0.0-rc.334
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@trpc/server@11.0.0-rc.330:
-    resolution: {integrity: sha512-fGVgu+w/ZUD3OmM1VjoeaMYZ7ZZicBSP+BbiR11A7tGh66IYuLquvPqNAT5ac3hrE/mJgYq1SMBBR321Z+YTfw==}
+  /@trpc/server@11.0.0-rc.334:
+    resolution: {integrity: sha512-ckg+f4z3Lc0wYvm1Cx8Zjz8b2hguNlUFQeF8vLrtWYBL8HEolshmxOHMG9MLc6WDE6T1R7DZrG+xEwjI44XH9w==}
     dev: false
 
   /@types/body-parser@1.19.5:
@@ -2630,7 +2630,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.29.5(@planetscale/database@1.16.0)(@types/react@18.2.74)(mysql2@3.9.3)(react@18.2.0):
+  /drizzle-orm@0.29.5(@planetscale/database@1.16.0)(@types/react@18.2.74)(mysql2@3.9.4)(react@18.2.0):
     resolution: {integrity: sha512-jS3+uyzTz4P0Y2CICx8FmRQ1eplURPaIMWDn/yq6k4ShRFj9V7vlJk67lSf2kyYPzQ60GkkNGXcJcwrxZ6QCRw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -2703,7 +2703,7 @@ packages:
     dependencies:
       '@planetscale/database': 1.16.0
       '@types/react': 18.2.74
-      mysql2: 3.9.3
+      mysql2: 3.9.4
       react: 18.2.0
     dev: false
 
@@ -4099,8 +4099,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /mysql2@3.9.3:
-    resolution: {integrity: sha512-+ZaoF0llESUy7BffccHG+urErHcWPZ/WuzYAA9TEeLaDYyke3/3D+VQDzK9xzRnXpd0eMtRf0WNOeo4Q1Baung==}
+  /mysql2@3.9.4:
+    resolution: {integrity: sha512-OEESQuwxMza803knC1YSt7NMuc1BrK9j7gZhCSs2WAyxr1vfiI7QLaLOKTh5c9SWGz98qVyQUbK8/WckevNQhg==}
     engines: {node: '>= 8.0'}
     dependencies:
       denque: 2.1.0
