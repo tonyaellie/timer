@@ -9,6 +9,7 @@ import { dark } from "@clerk/themes";
 import { Toaster } from "~/components/ui/sonner";
 import { SWInstaller } from "~/components/swInstaller";
 import { type Metadata } from "next";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,6 +32,11 @@ export default function RootLayout({
     <ClerkProvider appearance={dark as any}>
       <html lang="en">
         <body className={`font-sans ${inter.variable}`}>
+          <Script
+            defer
+            data-domain="timer.tokia.dev"
+            src="https://ingest.tokia.dev/js/script.js"
+          />
           <TRPCReactProvider>
             <Toaster />
             <SWInstaller />
